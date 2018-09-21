@@ -19,30 +19,48 @@ namespace BlogApplication.Migrations
 
         protected override void Seed(Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-
-
+            // Classes to work with users and roles (provided by Microsoft packages)
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            //Check if the roles are already created.
+            //If not, create them.
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
                 roleManager.Create(new IdentityRole { Name = "Admin" });
             }
-            
+
             if (!context.Roles.Any(r => r.Name == "Moderator"))
             {
                 roleManager.Create(new IdentityRole { Name = "Moderator" });
             }
 
+            //Check if the admin user is already created.
+            //If not, create it.
             ApplicationUser adminUser = null;
 
-            if (!context.Users.Any(u => u.UserName == "admin@myblogapp.com"))
+            if (!context.Users.Any(p => p.UserName == "admin@myblogapp.com"))
             {
                 adminUser = new ApplicationUser();
+                adminUser.UserName = "admin@myblogapp.com";
+                adminUser.Email = "admin@myblogapp.com";
+                adminUser.FirstName = "Admin";
+                adminUser.LastName = "User";
+                adminUser.DisplayName = "Admin User";
 
+                userManager.Create(adminUser, "Password-1");
+            }
+            else
+            {
+                adminUser = context.Users.Where(p => p.UserName == "admin@myblogapp.com")
+                    .FirstOrDefault();
+            }
+
+            //Check if the adminUser is already on the Admin role
+            //If not, add it.
+            if (!userManager.IsInRole(adminUser.Id, "Admin"))
+            {
+                userManager.AddToRole(adminUser.Id, "Admin");
             }
 
         }
