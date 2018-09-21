@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-xs-2">
                             <div id="colorlib-logo">
-                                @Html.ActionLink("Stuff", "Index", "Home")
+                                @Html.ActionLink("Information Technology", "Index", "Home")
                             </div>
                         </div>
                         <div class="col-xs-10 text-right menu-1">
@@ -61,22 +61,14 @@
                                 <li class="active">
                                     @Html.ActionLink("Home", "Index", "Home")
                                 </li>
-                                <li class="has-dropdown">
+                                <li>
                                     @Html.ActionLink("Blog", "Index", "BlogPosts")
-                                    <ul class="dropdown">
-                                        <li><a href="single.html">Blog Single</a></li>
-                                        <li><a href="#">Video</a></li>
-                                        <li><a href="#">Read</a></li>
-                                        <li><a href="#">Lifestyle</a></li>
-                                    </ul>
                                 </li>
-                                <li><a href="event.html">Event</a></li>
-                                <li><a href="travel.html">Travel</a></li>
                                 <li>
                                     @Html.ActionLink("About", "About", "Home")
                                 </li>
                                 <li>
-                                    <a href="~/Views/Home/Contact.cshtml">Contact</a>
+                                    @Html.ActionLink("Contact", "Contact", "Home")
                                 </li>
                             </ul>
                             @Html.Partial("_LoginPartial")
@@ -89,26 +81,28 @@
         <div id="colorlib-instagram">
             <div class="row">
                 <div class="col-md-12 col-md-offset-0 colorlib-heading text-center">
-                    <h2>Instagram</h2>
+                    <br>
+                    <br>
+                    <h2>TOP TECHNOLOGY BLOGS ON THE INTERNET TODAY | TECHNOLOGY WEBSITES</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="instagram-entry">
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-1.jpg);">
+                    <a href="https://techcrunch.com/" class="instagram text-center" style="background-image: url(Pictures/link1.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-2.jpg);">
+                    <a href="http://mashable.com/" class="instagram text-center" style="background-image: url(Pictures/link2.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-3.jpg);">
+                    <a href="https://www.technologyreview.com/" class="instagram text-center" style="background-image: url(Pictures/link3.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-4.jpg);">
+                    <a href="http://readwrite.com/" class="instagram text-center" style="background-image: url(Pictures/link4.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-5.jpg);">
+                    <a href="https://venturebeat.com/" class="instagram text-center" style="background-image: url(Pictures/link5.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-6.jpg);">
+                    <a href="http://www.freetech4teachers.com/" class="instagram text-center" style="background-image: url(Pictures/link6.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-7.jpg);">
+                    <a href="http://www.makeuseof.com/" class="instagram text-center" style="background-image: url(Pictures/link7.png);">
                     </a>
-                    <a href="#" class="instagram text-center" style="background-image: url(images/gallery-8.jpg);">
+                    <a href="https://www.cnet.com/news/" class="instagram text-center" style="background-image: url(Pictures/link1.png);">
                     </a>
                 </div>
             </div>
@@ -120,13 +114,10 @@
                         <h2>Navigational</h2>
                         <p>
                             <ul class="colorlib-footer-links">
-                                <li><a href="#"><i class="icon-check"></i> Home</a></li>
-                                <li><a href="#"><i class="icon-check"></i> About Me</a></li>
-                                <li><a href="#"><i class="icon-check"></i> Blog</a></li>
-                                <li><a href="#"><i class="icon-check"></i> Travel</a></li>
-                                <li><a href="#"><i class="icon-check"></i> Lifestyle</a></li>
-                                <li><a href="#"><i class="icon-check"></i> Fashion</a></li>
-                                <li><a href="#"><i class="icon-check"></i> Health</a></li>
+                                <li class="active"><i class="icon-check">@Html.ActionLink("Home", "Index", "Home")</i></li>
+                                <li class="active"><i class="icon-check">@Html.ActionLink("Blog", "Index", "BlogPosts")</i></li>
+                                <li class="active"><i class="icon-check">@Html.ActionLink("About", "About", "Home")</i></li>
+                                <li class="active"><i class="icon-check">@Html.ActionLink("Contact", "Contact", "Home")</i></li>
                             </ul>
                         </p>
                     </div>
@@ -157,54 +148,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <h2>Archive</h2>
-                        <p>
-                            <ul class="colorlib-footer-links">
-                                <li><a href="#"><i class="icon-check"></i> February 2018</a></li>
-                                <li><a href="#"><i class="icon-check"></i> January 2018</a></li>
-                                <li><a href="#"><i class="icon-check"></i> December 2017</a></li>
-                                <li><a href="#"><i class="icon-check"></i> November 2017</a></li>
-                                <li><a href="#"><i class="icon-check"></i> October 2017</a></li>
-                                <li><a href="#"><i class="icon-check"></i> September 2017</a></li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="col-md-3">
-                        <h2>Tags</h2>
-                        <p class="tags">
-                            <span><a href="#"><i class="icon-tag"></i> Modeling</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Fashion</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Life</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Blog</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Workout</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Vacation</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Travel</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Exercise</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Health</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> News</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Model</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Women</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Animals</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Nature</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Art</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Sea</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Ocean</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Office</a></span>
-                            <span><a href="#"><i class="icon-tag"></i> Home</a></span>
-                        </p>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <p>
-                            <small class="block">
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <a href="https://colorlib.com" target="_blank">Colorlib</a>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </small>
-                            <small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+                               <a href="http://Google.com" target="_blank">Google</a>
                         </p>
                     </div>
                 </div>

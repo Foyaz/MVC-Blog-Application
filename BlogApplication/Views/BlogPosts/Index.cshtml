@@ -7,8 +7,10 @@
 <h2>Index</h2>
 
 <p>
-    if (User.Identity.IsAuthenticate && User.IsInRole("Admin"))
-    @Html.ActionLink("Create New", "Create")
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table">
     <tr>
