@@ -1,15 +1,15 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
 <aside id="colorlib-breadcrumbs">
     <div class="container">
         <div class="row">
             <div class="col-md-12 breadcrumbs text-center">
                 <h2>About</h2>
-                <p><span><a href="index.html">Home</a></span> / <span>About</span></p>
+                <p><span>
+    @Html.ActionLink("Home", "Index", "Home")
+</span> / <span>About</span></p>
             </div>
         </div>
     </div>
@@ -19,20 +19,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img class="img-responsive" src="images/author.jpg" alt="">
+                <img class="img-responsive" src="~/Pictures/Profile.jpg" alt=""/>
             </div>
             <div class="col-md-6">
-                <p>Hi! My Name is <strong>Rich</strong> Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                <p>Hi! My Name is <strong>Foyaz</strong>. A highly focused and enthusiastic person who possesses a ‘can do’ attitude & 
+                adapts quickly to specific environment.
+                Has willingness to learn & enhance skills by being a part of any team for any available position. 
+                </p>
                 <blockquote>
-                    A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
+                    Have good knowledge in programming language and mobile game frameworks.
                 </blockquote>
-                <p class="first-letra">Far far away, <strong><a href="#">behind the word mountains</a></strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                <p class="first-letra">This site is about posting Blogs about Information and <strong><a href="https://en.wikipedia.org/wiki/Technology">Technology</a></strong>. No other topics are allowed.</p>
                 <p>
                     <ul class="colorlib-social-icons">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                        <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                        <li><a href="https://twitter.com/kayser_foyez"><i class="icon-twitter"></i></a></li>
+                        <li><a href="https://www.facebook.com/mohammad.foyaz.12"><i class="icon-facebook"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/mohammad-foyaz-ahmed-a6871816a"><i class="icon-linkedin"></i></a></li>
                     </ul>
                 </p>
             </div>
