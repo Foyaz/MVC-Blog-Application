@@ -17,5 +17,6 @@ namespace BlogApplication.Models
         public string UpdatedReason { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
+        public object BlogPostId { get; internal set; }
     }
 }

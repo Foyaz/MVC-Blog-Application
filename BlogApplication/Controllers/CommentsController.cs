@@ -13,6 +13,7 @@ namespace BlogApplication.Controllers
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private object comments;
 
         // GET: Comments
         public ActionResult Index()
@@ -39,7 +40,8 @@ namespace BlogApplication.Controllers
         // GET: Comments/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.BlogPostId = new SelectList(db.Posts, "Id", "Title");
             return View();
         }
 
@@ -57,7 +59,8 @@ namespace BlogApplication.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
+            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", comment.AuthorId);
+            ViewBag.BlogPostId = new SelectList(db.Posts, "Id", "Title", comment.BlogPostId);
             return View(comment);
         }
 
