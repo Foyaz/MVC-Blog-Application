@@ -20,7 +20,7 @@ namespace GuiBlogApplication.Controllers
         // GET: BlogPosts
         public ActionResult Index(int? page)
         {
-            int pageSize = 1; // display three blog posts at a time on this page
+            int pageSize = 1;
             int pageNumber = (page ?? 1);
             var post = db.Posts.OrderBy(p => p.Id).ToPagedList(pageNumber, pageSize);
             return View(post);
