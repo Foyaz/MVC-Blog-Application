@@ -18,5 +18,7 @@ namespace BlogApplication.Models
 
         public virtual ApplicationUser Author { get; set; }
         public object BlogPostId { get; internal set; }
+        public object BlogPost { get; internal set; }
+        public object UpdateReason { get; internal set; }
     }
 }

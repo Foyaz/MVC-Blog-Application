@@ -1,36 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BlogApplication.Helpers;
+using PagedList;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using BlogApplication.Models;
-
-namespace BlogApplication.Controllers
+using BlogApplication.Helpers;
+using PagedList.Mvc;
+namespace GuiBlogApplication.Controllers
 {
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private HttpPostedFileBase image;
 
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Posts.ToList());
+            int pageSize = 1; // display three blog posts at a time on this page
+            int pageNumber = (page ?? 1);
+            var post = db.Posts.OrderBy(p => p.Id).ToPagedList(pageNumber, pageSize);
+            return View(post);
         }
 
         // GET: BlogPosts/Details/5
-        public ActionResult Details(string Slug)
+        public ActionResult Details(int? id)
         {
-            if (String.IsNullOrWhiteSpace(Slug))
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogPost blogPost = db.Posts.FirstOrDefault(p => p.Slug == Slug);
+            BlogPost blogPost = db.Posts.Find(id);
             if (blogPost == null)
             {
                 return HttpNotFound();
@@ -38,10 +41,26 @@ namespace BlogApplication.Controllers
             return View(blogPost);
         }
 
+        // GET: BlogPosts/Details/5
+        public ActionResult DetailsSlug(string slug)
+        {
+            if (slug == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BlogPost blogPost = db.Posts
+                .Include(p => p.Comments.Select(t => t.Author))
+                .Where(p => p.Slug == slug)
+                .OrderBy(p => p.Id)
+                .FirstOrDefault();
+            if (blogPost == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", blogPost);
+        }
 
         // GET: BlogPosts/Create
-
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -52,22 +71,15 @@ namespace BlogApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-
-        public ActionResult Create([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaUrl,Published")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Id,Title,Body,MediaUrl,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
-                var Slug = StringUtilities.URLFriendly(blogPost.Title);
-                if (String.IsNullOrWhiteSpace(Slug))
-                {
-                    ModelState.AddModelError("Title", "Invalid title");
-                    return View(blogPost);
-                }
+                blogPost.Slug = StringUtilities.URLFriendly(blogPost.Title);
 
-                if (db.Posts.Any(p => p.Slug == Slug))
+                if (db.Posts.Any(p => p.Slug == blogPost.Slug))
                 {
-                    ModelState.AddModelError("Title", "The title must be unique");
+                    ModelState.AddModelError(nameof(BlogPost.Title), "This slug already exist");
                     return View(blogPost);
                 }
 
@@ -75,15 +87,14 @@ namespace BlogApplication.Controllers
                 {
                     var fileName = Path.GetFileName(image.FileName);
                     image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
-                    blogPost.MediaURL = "/Uploads/" + fileName;
+                    blogPost.MediaUrl = "/Uploads/" + fileName;
                 }
-                blogPost.Slug = Slug;
-                blogPost.Created = DateTimeOffset.Now;
+
+
                 db.Posts.Add(blogPost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
 
             return View(blogPost);
         }
@@ -108,25 +119,21 @@ namespace BlogApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaUrl,Published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Title,Slug,Body,MediaUrl,Published")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
                 var blog = db.Posts.Where(p => p.Id == blogPost.Id).FirstOrDefault();
+
                 blog.Body = blogPost.Body;
-                blog.Title = blogPost.Title;
-                blog.Slug = blogPost.Slug;
-                blog.MediaURL = blogPost.MediaURL;
+                blog.MediaUrl = blogPost.MediaUrl;
                 blog.Published = blogPost.Published;
+                blog.Slug = blogPost.Slug;
+                blog.Title = blogPost.Title;
                 blog.Updated = DateTime.Now;
-                if (ImageUploadValidator.IsWebFriendlyImage(image))
-                {
-                    var fileName = Path.GetFileName(image.FileName);
-                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
-                    blogPost.MediaURL = "/Uploads/" + fileName;
-                }
 
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(blogPost);
@@ -156,6 +163,36 @@ namespace BlogApplication.Controllers
             db.Posts.Remove(blogPost);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult CreateComment(string slug, string body)
+        {
+            if (slug == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var blogPost = db.Posts
+                .Where(p => p.Slug == slug)
+                .FirstOrDefault();
+
+            if (blogPost == null)
+            {
+                return HttpNotFound();
+            }
+
+            var comment = new Comment();
+            comment.AuthorId = User.Identity.GetUserId();
+            comment.BlogPostId = blogPost.Id;
+            comment.Created = DateTime.Now;
+            comment.Body = body;
+
+            db.Comments.Add(comment);
+            db.SaveChanges();
+
+            return RedirectToAction("DetailsSlug", new { slug = slug });
         }
 
         protected override void Dispose(bool disposing)

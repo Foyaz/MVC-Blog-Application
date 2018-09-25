@@ -65,6 +65,8 @@ namespace BlogApplication.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Admin,Moderator")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,19 +88,23 @@ namespace BlogApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PostId,AuthorId,Body,Created,Updated,UpdatedReason")] Comment comment)
+        [Authorize(Roles = "Admin,Moderator")]
+        public ActionResult Edit([Bind(Include = "Id,Body,UpdateReason")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(comment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var commentDb = db.Comments.Where(p => p.Id == comment.Id).FirstOrDefault();
+                commentDb.Updated = DateTime.Now;
+                commentDb.Body = comment.Body;
+                commentDb.UpdateReason = comment.UpdateReason; db.SaveChanges();
+                return RedirectToAction("DetailsSlug", "BlogPosts", new { slug = commentDb.BlogPost });
             }
-            ViewBag.AuthorId = new SelectList(db.ApplicationUsers, "Id", "FirstName", comment.AuthorId);
             return View(comment);
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Admin,Moderator")]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +120,8 @@ namespace BlogApplication.Controllers
         }
 
         // POST: Comments/Delete/5
+        [Authorize(Roles = "Admin,Moderator")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

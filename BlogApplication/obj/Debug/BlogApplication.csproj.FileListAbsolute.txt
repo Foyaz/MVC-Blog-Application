@@ -118,3 +118,7 @@ C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.csproj.CopyComplete
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.dll
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.pdb
+C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.dll
+C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.Mvc.dll
+C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.xml
+C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.Mvc.xml

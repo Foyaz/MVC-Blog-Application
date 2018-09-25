@@ -71,9 +71,23 @@
         <dd>
             @Html.DisplayFor(model => model.Published)
         </dd>
-
     </dl>
 </div>
+<div>
+    Comments:
+    @foreach(var comment in Model.Comments)
+    {
+        <p>
+           @comment.Body - by @comment.Author.DisplayName - @comment.Created.ToString("dd/mm/year");
+        </p>
+        if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Moderator")))
+        {
+            <a href="@Url.Action("Edit", "Comments", new { id = comment.Id})">Edit Comment</a>
+        }
+    }
+</div>
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

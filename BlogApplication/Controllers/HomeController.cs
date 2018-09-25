@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlogApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace BlogApplication.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -24,7 +27,7 @@ namespace BlogApplication.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return View(db.Posts.ToList());
         }
     }
 }
