@@ -18,12 +18,20 @@ namespace GuiBlogApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string search)
         {
             int pageSize = 1;
             int pageNumber = (page ?? 1);
-            var post = db.Posts.OrderBy(p => p.Id).ToPagedList(pageNumber, pageSize);
-            return View(post);
+            var query = db.Posts.OrderBy(p => p.Created).AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(p => p.Title.Contains(search) || p.Body.Contains(search) ||
+                p.Slug.Contains(search) || p.Comments.Any(t => t.Body.Contains(search))).AsQueryable();
+            }
+            var list = query.ToPagedList(pageNumber, pageSize);
+            ViewBag.SearchString = search;
+            return View(list);
         }
 
         // GET: BlogPosts/Details/5
