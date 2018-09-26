@@ -73,29 +73,6 @@
         </dd>
     </dl>
 </div>
-<div>
-    Comments:
-    @foreach (var comment in Model.Comments)
-    {
-        <p>
-            @comment.Body - by @comment.Author.DisplayName - @comment.Created.ToString("dd/mm/year");
-        </p>
-    }
-</div>
-
-@if (User.Identity.IsAuthenticated)
-{
-    <div>
-        Submit your comment!
-    </div>
-    <div>
-        @using (Html.BeginForm("CreateComment", "BlogPosts", FormMethod.Post))
-        {
-            <input type="hidden" name="slug" value="@Model.Slug" />
-            <textarea name="body"></textarea>
-            <input type="submit" value="Submit" />
-        }
-    </div>
 }
 
 <p>

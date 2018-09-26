@@ -11,7 +11,8 @@ using Microsoft.AspNet.Identity;
 using BlogApplication.Models;
 using BlogApplication.Helpers;
 using PagedList.Mvc;
-namespace GuiBlogApplication.Controllers
+
+namespace BlogApplication.Controllers
 {
     [RequireHttps]
     public class BlogPostsController : Controller
@@ -53,7 +54,7 @@ namespace GuiBlogApplication.Controllers
         }
 
         // GET: BlogPosts/Details/5
-        public ActionResult DetailsSlug(string slug)
+        public ActionResult DetailsSlug(string slug, string body)
         {
             if (slug == null)
             {
@@ -68,7 +69,20 @@ namespace GuiBlogApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View("Details", blogPost);
+
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                ViewBag.ErrorMessage = "Comment is required";
+                return View("Details", blogPost);
+            }
+            var comment = new Comment();
+            comment.AuthorId = User.Identity.GetUserId();
+            comment.BlogPostId = blogPost.Id;
+            comment.Created = DateTime.Now;
+            comment.Body = body;
+            db.Comments.Add(comment);
+            db.SaveChanges();
+            return RedirectToAction("DetailsSlug", new { slug = slug });
         }
 
         // GET: BlogPosts/Create
