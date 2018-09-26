@@ -36,13 +36,15 @@ namespace GuiBlogApplication.Controllers
         }
 
         // GET: BlogPosts/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string slug)
         {
-            if (id == null)
+            if (slug == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BlogPost blogPost = db.Posts.Find(id);
+            BlogPost blogPost = db.Posts.Include(p => p.Comments.Select(t => t.Author))
+                 .Where(p => p.Slug == slug)
+                 .FirstOrDefault();
             if (blogPost == null)
             {
                 return HttpNotFound();

@@ -94,11 +94,11 @@ namespace BlogApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var commentDb = db.Comments.Where(p => p.Id == comment.Id).FirstOrDefault();
-                commentDb.Updated = DateTime.Now;
-                commentDb.Body = comment.Body;
-                commentDb.UpdateReason = comment.UpdateReason; db.SaveChanges();
-                return RedirectToAction("DetailsSlug", "BlogPosts", new { slug = commentDb.BlogPost });
+                var commentDatabase = db.Comments.Where(p => p.Id == comment.Id).FirstOrDefault();
+                commentDatabase.Updated = DateTime.Now;
+                commentDatabase.Body = comment.Body;
+                commentDatabase.UpdateReason = comment.UpdateReason; db.SaveChanges();
+                return RedirectToAction("DetailsSlug", "BlogPosts", new { slug = commentDatabase.BlogPost });
             }
             return View(comment);
         }
