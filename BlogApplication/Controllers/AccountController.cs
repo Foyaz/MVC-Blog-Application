@@ -12,6 +12,7 @@ using BlogApplication.Models;
 
 namespace BlogApplication.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class AccountController : Controller
     {
@@ -76,10 +77,18 @@ namespace BlogApplication.Controllers
             {
                 return View(model);
             }
+        //    var user = new ApplicationUser
+        //    {
+        //        UserName = model.Email,
+        //        Email = model.Email,
+        //        FirstName = model.FirstName,
+        //        LastName = model.LastName,
+        //        DisplayName = model.DisplayName;
+        //}
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        // This doesn't count login failures towards account lockout
+        // To enable password failures to trigger account lockout, change to shouldLockout: true
+        var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:

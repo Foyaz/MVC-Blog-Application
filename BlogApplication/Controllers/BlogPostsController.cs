@@ -13,6 +13,7 @@ using BlogApplication.Helpers;
 using PagedList.Mvc;
 namespace GuiBlogApplication.Controllers
 {
+    [RequireHttps]
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

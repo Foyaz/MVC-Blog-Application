@@ -113,7 +113,6 @@ C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\Microsoft.AI.Web.xml
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.csprojAssemblyReference.cache
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.csproj.CoreCompileInputs.cache
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.csproj.CopyComplete
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.dll
@@ -122,3 +121,4 @@ C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.Mvc.dll
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.xml
 C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\bin\PagedList.Mvc.xml
+C:\Users\SD07\Documents\C#\MVC Applications\BlogApplication\BlogApplication\obj\Debug\BlogApplication.csprojAssemblyReference.cache
