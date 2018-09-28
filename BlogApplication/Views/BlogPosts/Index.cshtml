@@ -4,11 +4,8 @@
 @model IEnumerable<BlogApplication.Models.BlogPost>
 
 @{
-    ViewBag.Title = "Index";
     var pagedList = (IPagedList)Model;
 }
-
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css">
 
 <h2>Index</h2>
 
@@ -71,7 +68,7 @@
         <td>
             @if (item.MediaURL != null)
             {
-                <img class="img-responsive" src="@item.MediaURL" alt="">
+                <img class="img-responsive" src="@item.MediaURL" width="400px" height="300px" alt="">
             }
         </td>
         <td>
@@ -84,8 +81,9 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             }
-
-            @Html.ActionLink("Details", "Details", new { id = item.Id })
+        </td>
+        <td>
+        @Html.ActionLink("Details", "Details", new { slug = item.Slug })
         </td>
     </tr>
     }

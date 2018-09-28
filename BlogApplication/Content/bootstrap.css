@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -128,8 +128,13 @@ button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer; }
+    -webkit-appearance: button;
+    cursor: pointer;
+    margin-left: 300px;
+    padding: 10px;
+    background-color: darkblue;
+    color: white;
+}
 
 button[disabled],
 html input[disabled] {
@@ -647,9 +652,12 @@ blockquote.pull-right {
     content: '\00A0 \2014'; }
 
 address {
-  margin-bottom: 20px;
-  font-style: normal;
-  line-height: 1.42857; }
+    margin-bottom: 20px;
+    font-style: normal;
+    line-height: 1.42857;
+    padding: 25px;
+    margin-left: 720px;
+}
 
 code,
 kbd,
@@ -2323,7 +2331,8 @@ fieldset[disabled] a.btn {
 input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
-  width: 100%; }
+  width: 100%;
+}
 
 .fade {
   opacity: 0;
