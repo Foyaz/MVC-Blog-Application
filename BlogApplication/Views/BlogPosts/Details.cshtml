@@ -106,10 +106,13 @@
             <input type="submit" value="Submit" />
         }
     </div>
+    <li>
+        @Html.ActionLink("comments", "index", "comments")
+    </li>
 }
 
 
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

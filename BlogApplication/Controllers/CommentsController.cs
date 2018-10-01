@@ -129,9 +129,10 @@ namespace BlogApplication.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comments.Find(id);
+            var slug = comment.BlogPost;
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("DetailsSlug", "BlogPosts", new { slug });
         }
 
         protected override void Dispose(bool disposing)

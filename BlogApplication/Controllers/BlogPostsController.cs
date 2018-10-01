@@ -208,6 +208,12 @@ namespace BlogApplication.Controllers
                 return HttpNotFound();
             }
 
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                TempData["ErrorMessage"] = "Comment is required";
+                return RedirectToAction("DetailsSlug", new { slug = slug });
+            }
+
             var comment = new Comment();
             comment.AuthorId = User.Identity.GetUserId();
             comment.BlogPostId = blogPost.Id;

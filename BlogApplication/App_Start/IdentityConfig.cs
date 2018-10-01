@@ -22,7 +22,15 @@ namespace BlogApplication
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var MyEmailService = new MyEmailService();
+            var mailMessage = new MailMessage(
+               WebConfigurationManager.AppSettings["emailto"],
+               message.Destination
+               );
+            mailMessage.Body = message.Body;
+            mailMessage.Subject = message.Subject;
+            mailMessage.IsBodyHtml = true;
+            return MyEmailService.SendAsync(mailMessage);
         }
     }
 
